@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="montonio_form">
+            <input type="hidden" name="data_set" t-att-data-action-url="tx_url" data-remove-me=""/>
+            <input type="hidden" name='merchant' t-att-value='acquirer.company_id.name'/>
+            <input id="acquirer_montonio" type="hidden" name="acquirer" t-att-value="acquirer.id"/>
+            <input type="hidden" name="montonio_key" t-att-value="acquirer.montonio_access_key"/>
+            <input type="hidden" name='invoice_num' t-att-value='reference'/>
+            <!-- Customer data -->
+            <input type="hidden" name='customer_email' t-att-value='customer_email'/>
+            <input type="hidden" name='customer_phone' t-att-value='customer_phone'/>
+            <input type="hidden" name='customer_last_name' t-att-value='customer_last_name'/>
+            <input type="hidden" name='customer_first_name' t-att-value='customer_first_name'/>
+            <!-- Customer address data -->
+            <input type="hidden" name='customer_city' t-att-value='customer_city'/>
+            <input type="hidden" name='customer_address' t-att-value='customer_address'/>
+            <input type="hidden" name='customer_postal_code' t-att-value='customer_postal_code'/>
+            <!-- Script -->
+            <script type="text/javascript">
+                console.log('montonio form loaded');
+                odoo.define(function (require) {
+                    var ajax = require('web.ajax');
+                    ajax.loadJS("/montonio/static/src/js/montonio.js");
+                });
+            </script>
+        </template>
+    </data>
+</odoo>
