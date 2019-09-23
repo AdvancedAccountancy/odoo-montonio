@@ -59,7 +59,7 @@ odoo.define('payment_montonio.montonio', function(require) {
     var observer = new MutationObserver(function(mutations, observer) {
         for(var i=0; i<mutations.length; ++i) {
             for(var j=0; j<mutations[i].addedNodes.length; ++j) {
-                if(mutations[i].addedNodes[j].tagName.toLowerCase() === "form" && mutations[i].addedNodes[j].getAttribute('provider') == 'montonio') {
+                if(mutations[i].addedNodes[j].tagName.toLowerCase() == "form" && mutations[i].addedNodes[j].getAttribute('provider') == 'montonio') {
                     createDraft($(mutations[i].addedNodes[j]));
                 }
             }
@@ -121,7 +121,9 @@ odoo.define('payment_montonio.montonio', function(require) {
                     
                 })
             } else {
-                $('#o_payment_form_pay').prop('disabled', false);
+                setTimeout(function () {
+                    $('#o_payment_form_pay').prop('disabled', false);
+                }, 1000)
             }
         }
     }
@@ -193,7 +195,9 @@ odoo.define('payment_montonio.montonio', function(require) {
             Montonio.prepareDraftToken($DRAFTTOKEN);
             Montonio.addBackdrop();
             Montonio.openModal();
-            $('#o_payment_form_pay').prop('disabled', false);
+            setTimeout(function () {
+                $('#o_payment_form_pay').prop('disabled', false);
+            }, 1000)
         }
     }
     
@@ -204,7 +208,9 @@ odoo.define('payment_montonio.montonio', function(require) {
     function failGracefully(message) {
         var wizard = $(qweb.render('montonio.error', { 'msg': message || _t('Payment error') }));
         wizard.appendTo($('body')).modal({ 'keyboard': true });
-        $('#o_payment_form_pay').prop('disabled', false);
+        setTimeout(function () {
+            $('#o_payment_form_pay').prop('disabled', false);
+        }, 1000)
     }
     
     /**
