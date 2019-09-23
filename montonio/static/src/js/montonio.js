@@ -84,7 +84,7 @@ odoo.define('payment_montonio.montonio', function(require) {
         
         if (providerForm) {
             
-            $('#o_payment_form_pay').prop('disabled', true);
+            $('#o_payment_form_pay').css('pointerEvents', "none");
 
             // check that invoice number exists
             var invoiceField = _get_input_value('invoice_num');
@@ -122,7 +122,7 @@ odoo.define('payment_montonio.montonio', function(require) {
                 })
             } else {
                 setTimeout(function () {
-                    $('#o_payment_form_pay').prop('disabled', false);
+                    $('#o_payment_form_pay').css('pointerEvents', "auto");
                 }, 1000)
             }
         }
@@ -196,7 +196,7 @@ odoo.define('payment_montonio.montonio', function(require) {
             Montonio.addBackdrop();
             Montonio.openModal();
             setTimeout(function () {
-                $('#o_payment_form_pay').prop('disabled', false);
+                $('#o_payment_form_pay').css('pointerEvents', "auto");
             }, 1000)
         }
     }
@@ -209,7 +209,7 @@ odoo.define('payment_montonio.montonio', function(require) {
         var wizard = $(qweb.render('montonio.error', { 'msg': message || _t('Payment error') }));
         wizard.appendTo($('body')).modal({ 'keyboard': true });
         setTimeout(function () {
-            $('#o_payment_form_pay').prop('disabled', false);
+            $('#o_payment_form_pay').css('pointerEvents', "auto");
         }, 1000)
     }
     
