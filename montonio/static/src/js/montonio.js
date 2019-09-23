@@ -84,6 +84,8 @@ odoo.define('payment_montonio.montonio', function(require) {
         
         if (providerForm) {
             
+            $('#o_payment_form_pay').prop('disabled', true);
+
             // check that invoice number exists
             var invoiceField = _get_input_value('invoice_num');
             
@@ -116,7 +118,10 @@ odoo.define('payment_montonio.montonio', function(require) {
                     catch (err) {
                         failGracefully(translations[$lang]['MSG_NO_DRAFTTOKEN']); // No draft token, show error
                     }
+                    
                 })
+            } else {
+                $('#o_payment_form_pay').prop('disabled', false);
             }
         }
     }
@@ -188,6 +193,7 @@ odoo.define('payment_montonio.montonio', function(require) {
             Montonio.prepareDraftToken($DRAFTTOKEN);
             Montonio.addBackdrop();
             Montonio.openModal();
+            $('#o_payment_form_pay').prop('disabled', false);
         }
     }
     
@@ -198,6 +204,7 @@ odoo.define('payment_montonio.montonio', function(require) {
     function failGracefully(message) {
         var wizard = $(qweb.render('montonio.error', { 'msg': message || _t('Payment error') }));
         wizard.appendTo($('body')).modal({ 'keyboard': true });
+        $('#o_payment_form_pay').prop('disabled', false);
     }
     
     /**
