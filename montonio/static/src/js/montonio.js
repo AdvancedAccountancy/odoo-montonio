@@ -59,7 +59,7 @@ odoo.define('payment_montonio.montonio', function(require) {
     var observer = new MutationObserver(function(mutations, observer) {
         for(var i=0; i<mutations.length; ++i) {
             for(var j=0; j<mutations[i].addedNodes.length; ++j) {
-                if(mutations[i].addedNodes[j].tagName.toLowerCase() === "form" && mutations[i].addedNodes[j].getAttribute('provider') == 'montonio') {
+                if(mutations[i].addedNodes[j].tagName.toLowerCase() == "form" && mutations[i].addedNodes[j].getAttribute('provider') == 'montonio') {
                     createDraft($(mutations[i].addedNodes[j]));
                 }
             }
@@ -84,6 +84,8 @@ odoo.define('payment_montonio.montonio', function(require) {
         
         if (providerForm) {
             
+            $('#o_payment_form_pay').css('pointerEvents', "none");
+
             // check that invoice number exists
             var invoiceField = _get_input_value('invoice_num');
             
@@ -116,7 +118,12 @@ odoo.define('payment_montonio.montonio', function(require) {
                     catch (err) {
                         failGracefully(translations[$lang]['MSG_NO_DRAFTTOKEN']); // No draft token, show error
                     }
+                    
                 })
+            } else {
+                setTimeout(function () {
+                    $('#o_payment_form_pay').css('pointerEvents', "auto");
+                }, 1000)
             }
         }
     }
@@ -188,6 +195,9 @@ odoo.define('payment_montonio.montonio', function(require) {
             Montonio.prepareDraftToken($DRAFTTOKEN);
             Montonio.addBackdrop();
             Montonio.openModal();
+            setTimeout(function () {
+                $('#o_payment_form_pay').css('pointerEvents', "auto");
+            }, 1000)
         }
     }
     
@@ -198,6 +208,9 @@ odoo.define('payment_montonio.montonio', function(require) {
     function failGracefully(message) {
         var wizard = $(qweb.render('montonio.error', { 'msg': message || _t('Payment error') }));
         wizard.appendTo($('body')).modal({ 'keyboard': true });
+        setTimeout(function () {
+            $('#o_payment_form_pay').css('pointerEvents', "auto");
+        }, 1000)
     }
     
     /**
