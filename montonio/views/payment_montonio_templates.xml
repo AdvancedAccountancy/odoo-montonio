@@ -16,6 +16,7 @@
             <input type="hidden" name='customer_city' t-att-value='customer_city'/>
             <input type="hidden" name='customer_address' t-att-value='customer_address'/>
             <input type="hidden" name='customer_postal_code' t-att-value='customer_postal_code'/>
+            <input type="hidden" name='environment' t-att-value='environment'/>
             <!-- Script -->
             <script type="text/javascript">
                 console.log('montonio form loaded');

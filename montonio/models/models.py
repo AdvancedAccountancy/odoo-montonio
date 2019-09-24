@@ -22,6 +22,7 @@ class MontonioAcquirer(models.Model):
 
         montonio_tx_values = dict(values)
         montonio_tx_values.update({
+            "environment" 	        : self.environment,
             "customer_first_name" 	: values.get('partner_first_name'),
             "customer_last_name"  	: values.get('partner_last_name'),
             "customer_email"  		: values.get('partner_email'),
