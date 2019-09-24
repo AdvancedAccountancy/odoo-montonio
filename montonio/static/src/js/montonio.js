@@ -187,6 +187,9 @@ odoo.define('payment_montonio.montonio', function(require) {
     
     // Montonio flow
     function initMontonio() {
+
+        // set environment
+        $ENVIRONMENT = (_get_input_value('environment') == 'test') ? 'sandbox' : 'production';
         
         // Register Montonio callback functions 
         if ($DRAFTTOKEN && Montonio) {
