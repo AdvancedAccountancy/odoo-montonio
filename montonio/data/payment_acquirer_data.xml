@@ -2,16 +2,26 @@
 <odoo>
     <data noupdate="1">
 
-        <record id="payment_acquirer_montonio" model="payment.acquirer">
+        <record id="payment_acquirer_montonio_financing" model="payment.acquirer">
             <field name="name">Montonio järelmaks</field>
-            <field name="image" type="base64" file="montonio/static/src/img/icon.png"/>
-            <field name="provider">montonio</field>
+            <field name="provider">montonio_financing</field>
             <field name="company_id" ref="base.main_company"/>
             <field name="view_template_id" ref="montonio_form"/>
+            <field name="pre_msg"><![CDATA[<p>Võrdle järelmaksupakkumisi mitmelt krediidiandjalt korraga ja vali endale sobivaim.</p>]]></field>
             <field name="environment">test</field>
-            <field name="pre_msg"><![CDATA[<p>Montonio pre msg.</p>]]></field>
-            <field name="montonio_access_key">test</field>
-            <field name="montonio_secret_key">test</field>
+            <field name="montonio_access_key">96e68ed1-0938-4514-add1-ba50a46b7afd</field>
+            <field name="montonio_secret_key">0IN7qNdpGufFQ1W8q8KVSebPvI6SlUQNZQRp8znJaVBg</field>
+        </record>
+
+        <record id="payment_acquirer_montonio_payments" model="payment.acquirer">
+            <field name="name">Maksa pangas</field>
+            <field name="provider">montonio_payments</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="view_template_id" ref="montonio_form"/>
+            <field name="pre_msg"><![CDATA[<p>Maksa mugavalt pangalingiga.</p>]]></field>
+            <field name="environment">test</field>
+            <field name="montonio_access_key">96e68ed1-0938-4514-add1-ba50a46b7afd</field>
+            <field name="montonio_secret_key">0IN7qNdpGufFQ1W8q8KVSebPvI6SlUQNZQRp8znJaVBg</field>
         </record>
 
     </data>
