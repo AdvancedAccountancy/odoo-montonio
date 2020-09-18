@@ -11,8 +11,8 @@ MONTONIO_API_URL = 'https://api.montonio.com'
 
 MONTONIO_SANDBOX_API_URL = 'https://sandbox-api.montonio.com'
 
-class MontonioAPI:
-    ''' Montonio SDK for Python 3. '''
+class MontonioFinancingSDK:
+    ''' Montonio Financing SDK for Python 3. '''
 
     def __init__(self, public_key, secret_key, environment='sandbox'):
         self._public_key = public_key
