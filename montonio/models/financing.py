@@ -9,8 +9,6 @@ _logger = logging.getLogger(__name__)
 
 from .. vendor.MontonioFinancingSDK import MontonioFinancingSDK
 
-from odoo.addons.payment.controllers.portal import PaymentProcessing
-
 class MontonioFinancingAcquirer(models.Model):
     _inherit = 'payment.acquirer'
 
@@ -50,7 +48,7 @@ class MontonioFinancingAcquirer(models.Model):
     
     def montonio_financing_get_form_action_url(self):
         self.ensure_one()
-        return self.get_base_url() + 'payment/montonio_financing/redirect'
+        return self.env['ir.config_parameter'].sudo().get_param('web.base.url')  + '/payment/montonio_financing/redirect'
 
 class PaymentTransactionMontonioFinancing(models.Model):
     _inherit = 'payment.transaction'
@@ -128,8 +126,7 @@ class PaymentTransactionMontonioFinancing(models.Model):
         res = sdk.get_montonio_application(self.reference)
 
         if res['status'] == 'SUCCESS' and res['data']['status'] == 'signed':
-            # redirect_url = '/payment/process/'
-            redirect_url = 'http://localhost:8071/payment/process/' # TODO: Remove localhost
+            redirect_url = '/payment/process/'
 
             # mark a new state for the transaction
             self._set_transaction_done()
