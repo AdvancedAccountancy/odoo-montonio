@@ -32,12 +32,12 @@ class MontonioPaymentsAcquirer(models.Model):
             'amount'                : values.get('amount') or '',
             'currency'              : 'EUR',
         })
-        
+
         return montonio_tx_values
 
     def montonio_payments_get_form_action_url(self):
         self.ensure_one()
-        return self.get_base_url() + 'payment/montonio_payments/redirect'
+        return self.env['ir.config_parameter'].sudo().get_param('web.base.url')  + '/payment/montonio_payments/redirect'
 
 class PaymentTransactionMontonioPayments(models.Model):
     _inherit = 'payment.transaction'
@@ -102,7 +102,8 @@ class PaymentTransactionMontonioPayments(models.Model):
             return redirect_url
 
         if payment_info['status'] == 'finalized':
-            redirect_url = 'http://localhost:8071/payment/process/' # TODO: Remove localhost
+            # redirect_url = 'http://localhost:8071/payment/process/' # TODO: Remove localhost
+            redirect_url = '/payment/process/'
 
             # mark a new state for the transaction
             self._set_transaction_done()
