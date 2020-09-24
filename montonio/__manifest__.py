@@ -26,7 +26,8 @@ Visit www.montonio.com for more details.
     ],
     'images': [
         'static/description/icon.png',
-        'static/description/banner.png'
+        'static/description/banner.png',
+        'static/images/banner.png'
     ],
     'installable': True,
     'post_init_hook': 'create_missing_journal_for_acquirers',
