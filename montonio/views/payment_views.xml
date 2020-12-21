@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="acquirer_form_montonio" model="ir.ui.view">
+    <record id="acquirer_form_montonio_financing" model="ir.ui.view">
         <field name="name">payment.acquirer.form.inherit</field>
         <field name="model">payment.acquirer</field>
         <field name="inherit_id" ref="payment.acquirer_form"/>
         <field name="arch" type="xml">
             <xpath expr='//group[@name="acquirer"]' position='after'>
-                <group attrs="{'invisible': [('provider', '!=', 'montonio')]}">
+                <group attrs="{'invisible': [('provider', '!=', 'montonio_financing')]}">
+                    <field name="name"/>
+                    <field name="montonio_access_key"/>
+                    <field name="montonio_secret_key" password="True"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="acquirer_form_montonio_payments" model="ir.ui.view">
+        <field name="name">payment.acquirer.form.inherit</field>
+        <field name="model">payment.acquirer</field>
+        <field name="inherit_id" ref="payment.acquirer_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//group[@name="acquirer"]' position='after'>
+                <group attrs="{'invisible': [('provider', '!=', 'montonio_payments')]}">
                     <field name="name"/>
                     <field name="montonio_access_key"/>
                     <field name="montonio_secret_key" password="True"/>
